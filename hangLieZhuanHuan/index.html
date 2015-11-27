@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title> -消消看- </title>
+<style>
+*{margin: 0px; padding: 0px;}
+li{list-style: none;}
+#ul1{margin: 20px auto; border: 1px solid #000; border-bottom: none; border-right: none; overflow: hidden; }
+#ul1 li{float: left; border: 1px solid #000; border-left: none; border-top: none;}
+</style>
+</head>
+<body>
+
+<ul id="ul1">
+
+</ul>
+	
+</body>
+<script>
+var oUl = document.getElementById('ul1');
+var aLi = oUl.getElementsByTagName('li');
+var size = 7;
+var len = size * size;
+var arr = [];
+var sizeGrid = 50;  // 网格大小
+
+oUl.style.width = size * (sizeGrid+1) + 'px';
+
+for( var i=0;i<len;i++ ){
+	var oLi = document.createElement('li');
+	oLi.style.width = sizeGrid + 'px';
+	oLi.style.height = sizeGrid + 'px';
+	oLi.innerHTML = i;
+	arr.push(i);
+	oUl.appendChild(oLi);
+}
+// console.log( arr );
+arr = changeXY( arr, size );
+arr = changeXY( arr, size );
+
+for( var i=0;i<aLi.length;i++ ){
+	aLi[i].innerHTML = arr[i];
+}
+
+function changeXY(arr, size){
+	var newArr = [];
+	var iNow = 0;
+	// 取模
+	(function(){
+		if( size == iNow ){
+			return ;
+		}
+		for( var i = 0;i<arr.length;i++ ){
+			if( i%size == iNow ){
+				newArr.push(arr[i]);
+			}
+		}
+		iNow++;
+		arguments.callee();
+	})()
+	return newArr;
+}
+
+/*function changeXY1(arr){
+	var newArr = [];
+	// 取模
+	for( var i = 0;i<arr.length;i++ ){
+		if( i%4 == 0 ){
+			newArr.push(arr[i]);
+		}
+	}
+	for( var i = 0;i<arr.length;i++ ){
+		if( i%4 == 1 ){
+			newArr.push(arr[i]);
+		}
+	}
+	for( var i = 0;i<arr.length;i++ ){
+		if( i%4 == 2 ){
+			newArr.push(arr[i]);
+		}
+	}
+	for( var i = 0;i<arr.length;i++ ){
+		if( i%4 == 3 ){
+			newArr.push(arr[i]);
+		}
+	}
+	return newArr;
+}*/
+</script>
+</html>
